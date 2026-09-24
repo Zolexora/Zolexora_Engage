@@ -5,10 +5,10 @@
 This repo is a pnpm monorepo with a few small apps and shared libraries:
 
 - `artifacts/api-server`: Express API for health checks and WhatsApp send/webhook endpoints.
-- `artifacts/message-dispatcher`: Vite + React main dispatcher UI for importing duty sheets and sending WhatsApp messages.
+- `artifacts/client`: Vite + React main dispatcher UI for importing duty sheets and sending WhatsApp messages.
 - `lib/*`: shared workspace packages such as generated API clients (`api-zod`, `api-client-react`), API spec, and Drizzle/Postgres DB schema.
 - `supabase/`: Supabase configuration and DB artifacts.
-- `scripts/`: bootstrap helpers that load secrets from Bitwarden and `.env`.
+- `scripts/`: shell helpers that load secrets from Bitwarden and `.env`.
 - `docker/`: container build files used by the Docker Compose stack.
 
 The main product flow is: import an Excel/CSV duty sheet in the dispatcher UI, validate the required columns, personalize a WhatsApp message per driver, send via the Express API, and poll delivery status back to the UI.
@@ -27,11 +27,11 @@ Common commands from the repo root:
   - `pnpm typecheck`
 - Run typecheck for one package:
   - `pnpm --filter @workspace/api-server typecheck`
-  - `pnpm --filter @workspace/message-dispatcher typecheck`
+  - `pnpm --filter @workspace/client typecheck`
   - `pnpm --filter @workspace/db typecheck` (if a package has a typecheck script; `@workspace/db` does not, so prefer `pnpm --dir lib/db exec tsc --noEmit` only if needed)
 - Build one app/package:
   - `pnpm --filter @workspace/api-server build`
-  - `pnpm --filter @workspace/message-dispatcher build`
+  - `pnpm --filter @workspace/client build`
 
 There are no dedicated test or lint scripts in this repo (`test`, `lint`, `eslint`, `vitest`, `jest`, etc. are not configured). The effective validation path is TypeScript checks and app builds, not a separate unit-test suite.
 
@@ -52,10 +52,10 @@ Runtime/dev commands:
 The code is split intentionally around a few responsibilities:
 
 - `artifacts/api-server` is the backend boundary. It creates the Express app, wires routing, logs with `pino`, applies `cors` and JSON parsing, and serves `/api/*` routes. The WhatsApp functionality is owned here, including signature verification, send calls to Meta's Graph API, webhook processing, and in-memory status tracking for message delivery states.
-- `artifacts/message-dispatcher` is the user-facing business app. Its `src/app` folder owns providers and routing, `src/features/auth` owns Supabase access gating, and `src/features/dispatch` owns spreadsheet import, queue management, personalized messages, and WhatsApp status polling.
-- The canonical product UI is the dispatcher app in `artifacts/message-dispatcher`.
+- `artifacts/client` is the user-facing business app. Its `src/app` folder owns providers and routing, `src/features/auth` owns Supabase access gating, and `src/features/dispatch` owns spreadsheet import, queue management, personalized messages, and WhatsApp status polling.
+- The canonical product UI is the client app in `artifacts/client`.
 - `lib/api-spec` + generated client packages define the API contract used by both server and clients. The generated `@workspace/api-zod` and `@workspace/api-client-react` packages should be treated as contract artifacts: when the API shape changes, update the spec/generation step rather than hand-editing generated outputs.
-- `lib/db` is the database layer. It is set up for Drizzle + PostgreSQL schema work and is intentionally minimal today (`src/schema/Index.ts` is a placeholder export file).
+- `lib/db` is the database layer. It is set up for Drizzle + PostgreSQL schema work and is intentionally minimal today (`src/schema/index.ts` is a placeholder export file).
 - `supabase/` and environment variables power the app's external services. Secrets are expected to come from Bitwarden and `.env`, not from committed source files.
 
 ## Key conventions and repo-specific patterns

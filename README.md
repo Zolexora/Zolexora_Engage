@@ -9,7 +9,7 @@ artifacts/
   api-server/
     src/App.ts              # Express middleware and API assembly
     src/routes/             # HTTP route modules
-  message-dispatcher/
+  client/
     src/app/App.tsx         # React providers and routing
     src/features/auth/      # Supabase auth gate and login UI
     src/features/dispatch/  # Duty-sheet import, queue, and WhatsApp dispatch
@@ -25,7 +25,7 @@ lib/
 
 The recommended free deployment separates the public frontend from the API:
 
-- **Frontend:** Cloudflare Pages, built from `artifacts/message-dispatcher`
+- **Frontend:** Cloudflare Pages, built from `artifacts/client`
 - **API:** Render Web Service, configured by `render.yaml`
 - **Database and authentication:** Supabase
 - **WhatsApp webhook:** the public Render API URL at
@@ -44,8 +44,8 @@ Use these build settings:
 
 ```text
 Root directory: /
-Build command: pnpm install --frozen-lockfile && pnpm --filter @workspace/message-dispatcher build
-Build output directory: artifacts/message-dispatcher/dist
+Build command: pnpm install --frozen-lockfile && pnpm --filter @workspace/client build
+Build output directory: artifacts/client/dist
 ```
 
 Set these Pages environment variables for the production environment:

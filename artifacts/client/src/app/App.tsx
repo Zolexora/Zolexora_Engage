@@ -1,11 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
-import { ErrorBoundary } from '@/components/ErrorBoundary.tsx';
-import { Toaster } from '@/components/ui/Toaster.tsx';
-import { TooltipProvider } from '@/components/ui/Tooltip.tsx';
-import { AuthGate } from '@/features/auth/AuthGate.tsx';
-import { DispatchPage } from '@/features/dispatch/DispatchPage.tsx';
-import NotFound from '@/pages/NotFound.tsx';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { Toaster } from '@/components/ui/Toaster';
+import { TooltipProvider } from '@/components/ui/Tooltip';
+import { AuthGate } from '@/features/auth/AuthGate';
+import { DispatchPage } from '@/features/dispatch/DispatchPage';
+import NotFound from '@/pages/NotFound';
 
 const queryClient = new QueryClient();
 

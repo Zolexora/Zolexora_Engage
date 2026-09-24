@@ -39,4 +39,4 @@ do
   export "$variable=$value"
 done
 
-exec pnpm --filter @workspace/message-dispatcher dev
+exec pnpm --filter @workspace/client dev
