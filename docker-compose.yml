@@ -38,9 +38,9 @@ services:
       context: .
       dockerfile: docker/frontend.Dockerfile
       args:
-        APP_DIR: artifacts/client
-        APP_DIR_NAME: client
-        APP_NAME: "@workspace/client"
+        APP_DIR: artifacts/client/web
+        APP_DIR_NAME: client/web
+        APP_NAME: "@workspace/client-web"
         PORT: "5174"
         BASE_PATH: "/"
         VITE_API_URL: ${API_PUBLIC_URL:-http://127.0.0.1:3000}

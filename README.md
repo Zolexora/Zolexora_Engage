@@ -25,7 +25,7 @@ lib/
 
 The recommended free deployment separates the public frontend from the API:
 
-- **Frontend:** Cloudflare Pages, built from `artifacts/client`
+- **Frontend:** Cloudflare Pages, built from `artifacts/client/web`
 - **API:** Render Web Service, configured by `render.yaml`
 - **Database and authentication:** Supabase
 - **WhatsApp webhook:** the public Render API URL at
@@ -44,8 +44,8 @@ Use these build settings:
 
 ```text
 Root directory: /
-Build command: pnpm install --frozen-lockfile && pnpm --filter @workspace/client build
-Build output directory: artifacts/client/dist
+Build command: pnpm install --frozen-lockfile && pnpm --filter @workspace/client-web build
+Build output directory: artifacts/client/web/dist
 ```
 
 Set these Pages environment variables for the production environment:
