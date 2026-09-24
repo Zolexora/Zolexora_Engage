@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
-import healthRouter from "./health";
-import whatsappRouter from "./whatsapp";
+import healthRouter from "./Health";
+import whatsappRouter from "./WhatsApp";
 
 const router: IRouter = Router();
 

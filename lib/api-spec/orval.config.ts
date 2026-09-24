@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, "..", "..");
 const apiClientReactSrc = path.resolve(root, "lib", "api-client-react", "src");
 const apiZodSrc = path.resolve(root, "lib", "api-zod", "src");
 
-// Our exports make assumptions about the title of the API being "Api" (i.e. generated output is `api.ts`).
+// Our exports make assumptions about the title of the API being "Api" (i.e. generated output is `Api.ts`).
 const titleTransformer: InputTransformerFn = (config) => {
   config.info ??= {};
   config.info.title = "Api";
@@ -16,7 +16,7 @@ const titleTransformer: InputTransformerFn = (config) => {
 export default defineConfig({
   "api-client-react": {
     input: {
-      target: "./openapi.yaml",
+      target: "openapi.yaml",
       override: {
         transformer: titleTransformer,
       },
@@ -34,7 +34,7 @@ export default defineConfig({
           includeHttpResponseReturnType: false,
         },
         mutator: {
-          path: path.resolve(apiClientReactSrc, "custom-fetch.ts"),
+          path: path.resolve(apiClientReactSrc, "CustomFetch.ts"),
           name: "customFetch",
         },
       },
@@ -42,7 +42,7 @@ export default defineConfig({
   },
   zod: {
     input: {
-      target: "./openapi.yaml",
+      target: "openapi.yaml",
       override: {
         transformer: titleTransformer,
       },

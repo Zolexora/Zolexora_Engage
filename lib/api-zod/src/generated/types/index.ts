@@ -6,12 +6,12 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from './errorResponse';
-export * from './getWhatsAppMessageStatusesParams';
-export * from './healthStatus';
-export * from './verifyWhatsAppWebhookParams';
-export * from './whatsAppMessageInput';
-export * from './whatsAppMessageResult';
-export * from './whatsAppStatus';
-export * from './whatsAppStatusResponse';
-export * from './whatsAppStatusStatus';
+export * from './ErrorResponse';
+export * from './GetWhatsAppMessageStatusesParams';
+export * from './HealthStatus';
+export * from './VerifyWhatsAppWebhookParams';
+export * from './WhatsAppMessageInput';
+export * from './WhatsAppMessageResult';
+export * from './WhatsAppStatus';
+export * from './WhatsAppStatusResponse';
+export * from './WhatsAppStatusStatus';

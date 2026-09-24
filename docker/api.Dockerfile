@@ -5,7 +5,7 @@ ENV npm_config_user_agent=pnpm/11.5.0
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
-COPY artifacts/api-server/package.json artifacts/api-server/tsconfig.json artifacts/api-server/build.mjs ./artifacts/api-server/
+COPY artifacts/api-server/package.json artifacts/api-server/tsconfig.json artifacts/api-server/Build.mjs ./artifacts/api-server/
 COPY lib/api-zod/package.json lib/api-zod/tsconfig.json ./lib/api-zod/
 COPY lib/db/package.json lib/db/tsconfig.json ./lib/db/
 

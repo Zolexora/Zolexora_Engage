@@ -39,11 +39,11 @@ Runtime/dev commands:
 
 - Start the full dockerized stack:
   - `export BW_SESSION="$(bw unlock --raw)"`
-  - `./scripts/run-project.sh` (repo scripts load Bitwarden-backed env secrets via `dotenvx`)
+  - `./scripts/RunProject.sh` (repo scripts load Bitwarden-backed env secrets via `dotenvx`)
   - or: `docker compose up --build`
 - Local frontend dev:
   - `export BW_SESSION="$(bw unlock --raw)"`
-  - `./scripts/run-web-dev.sh`
+  - `./scripts/RunWebDev.sh`
 - Local API server dev:
   - `pnpm --filter @workspace/api-server dev`
 
@@ -52,10 +52,10 @@ Runtime/dev commands:
 The code is split intentionally around a few responsibilities:
 
 - `artifacts/api-server` is the backend boundary. It creates the Express app, wires routing, logs with `pino`, applies `cors` and JSON parsing, and serves `/api/*` routes. The WhatsApp functionality is owned here, including signature verification, send calls to Meta's Graph API, webhook processing, and in-memory status tracking for message delivery states.
-- `artifacts/message-dispatcher` is the user-facing business app. It imports spreadsheet rows, normalizes column names, validates required fields, generates personalized messages from the template, sends to the API, and polls WhatsApp status updates.
+- `artifacts/message-dispatcher` is the user-facing business app. Its `src/app` folder owns providers and routing, `src/features/auth` owns Supabase access gating, and `src/features/dispatch` owns spreadsheet import, queue management, personalized messages, and WhatsApp status polling.
 - The canonical product UI is the dispatcher app in `artifacts/message-dispatcher`.
 - `lib/api-spec` + generated client packages define the API contract used by both server and clients. The generated `@workspace/api-zod` and `@workspace/api-client-react` packages should be treated as contract artifacts: when the API shape changes, update the spec/generation step rather than hand-editing generated outputs.
-- `lib/db` is the database layer. It is set up for Drizzle + PostgreSQL schema work and is intentionally minimal today (`src/schema/index.ts` is a placeholder export file).
+- `lib/db` is the database layer. It is set up for Drizzle + PostgreSQL schema work and is intentionally minimal today (`src/schema/Index.ts` is a placeholder export file).
 - `supabase/` and environment variables power the app's external services. Secrets are expected to come from Bitwarden and `.env`, not from committed source files.
 
 ## Key conventions and repo-specific patterns

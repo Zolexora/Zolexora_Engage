@@ -1,5 +1,26 @@
 # FleetRelay
 
+## Code layout
+
+The repository is organized by deployable application and feature ownership:
+
+```text
+artifacts/
+  api-server/
+    src/App.ts              # Express middleware and API assembly
+    src/routes/             # HTTP route modules
+  message-dispatcher/
+    src/app/App.tsx         # React providers and routing
+    src/features/auth/      # Supabase auth gate and login UI
+    src/features/dispatch/  # Duty-sheet import, queue, and WhatsApp dispatch
+    src/components/ui/      # Shared UI primitives for the frontend
+lib/
+  api-spec/                 # OpenAPI source
+  api-zod/                  # Generated request/response schemas
+  api-client-react/         # Generated frontend API client
+  db/                       # Database schema and Drizzle setup
+```
+
 ## Deployment
 
 The recommended free deployment separates the public frontend from the API:
@@ -56,7 +77,7 @@ file is required.
 
 ```bash
 export BW_SESSION="$(bw unlock --raw)"
-./scripts/run-project.sh
+./scripts/RunProject.sh
 ```
 
 Stop the stack with `Ctrl+C`. To remove the containers and network:
@@ -69,7 +90,7 @@ For local Vite development with Supabase variables loaded from Bitwarden:
 
 ```bash
 export BW_SESSION="$(bw unlock --raw)"
-./scripts/run-web-dev.sh
+./scripts/RunWebDev.sh
 ```
 
 ## Duty sheet format
