@@ -31,24 +31,6 @@ services:
       WHATSAPP_WEBHOOK_VERIFY_TOKEN:
     restart: unless-stopped
 
-  mockup-sandbox:
-    image: fleetrelay-mockup
-    container_name: fleetrelay-mockup
-    build:
-      context: .
-      dockerfile: docker/frontend.Dockerfile
-      args:
-        APP_DIR: artifacts/mockup-sandbox
-        APP_DIR_NAME: mockup-sandbox
-        APP_NAME: "@workspace/mockup-sandbox"
-        PORT: "5173"
-        BASE_PATH: "/"
-        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-}
-        VITE_SUPABASE_PUBLISHABLE_KEY: ${VITE_SUPABASE_PUBLISHABLE_KEY:-}
-    ports:
-      - "${MOCKUP_HOST_PORT:-5173}:80"
-    restart: unless-stopped
-
   web-app:
     image: fleetrelay-web
     container_name: fleetrelay-web

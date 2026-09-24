@@ -44,13 +44,12 @@ https://<your-render-api>.onrender.com/api/whatsapp/webhook
 
 ## Run with Docker
 
-The project runs as three containers:
+The project runs as two containers:
 
 - API: <http://localhost:3000>
-- Mockup Sandbox: <http://localhost:5173>
 - Web App: <http://localhost:5174>
 
-Docker names: `fleetrelay-api`, `fleetrelay-mockup`, and `fleetrelay-web`.
+Docker names: `fleetrelay-api` and `fleetrelay-web`.
 
 The encrypted `.env` key is loaded from Bitwarden at runtime. No `.env.keys`
 file is required.
